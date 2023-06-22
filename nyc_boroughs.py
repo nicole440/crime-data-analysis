@@ -1,4 +1,5 @@
 import sqlite3
+import csv
 
 connection = sqlite3.connect("nyc_boroughs.db")
 cursor = connection.cursor()
@@ -87,5 +88,24 @@ print("***************************************************")
 for row in cursor.execute("SELECT * FROM NYC_Boroughs"):
     print(row)
 
+print("***************************************************")
+
+
+# Export data from SQLite database to a CSV file (for the purpose of PowerBI import)
+cursor.execute("SELECT * FROM NYC_Boroughs")
+results = cursor.fetchall()
+csv_file = 'nyc_boroughs.csv'
+
+# Write to new CSV file
+with open(csv_file, 'w', newline='') as file:
+    # Create a CSV writer
+    writer = csv.writer(file)
+    # Write the header row
+    writer.writerow(['Borough', 'County', 'Latitude', 'Longitude', 'Population'])
+    # Write the data rows
+    writer.writerows(results)
+    print("Data exported successfully!")
+
 connection.commit()
 connection.close()
+
