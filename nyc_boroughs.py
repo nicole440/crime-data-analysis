@@ -66,7 +66,7 @@ print(population_search)
 
 print("***************************************************")
 
-# Manipulate database data to replace 0 populatino value in NYC_Boroughs table with population data from Borough_Populations table
+# Manipulate database data to replace 0 population value in NYC_Boroughs table with population data from Borough_Populations table
 print("Adjusted:")
 adjusted_data = [
     row[:-1] + (pop[1],) # Add the value in the last row of nyc_boroughs to the value at index 1 of the population table...
